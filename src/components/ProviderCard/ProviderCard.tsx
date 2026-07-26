@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { LocalServiceProvider } from '../../mock/providers';
 import styles from './ProviderCard.module.scss';
 
@@ -9,13 +11,13 @@ export interface ProviderCardProps {
 }
 
 export const ProviderCard: React.FC<ProviderCardProps> = ({ provider, onClick }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleCardClick = () => {
     if (onClick) {
       onClick();
     } else {
-      navigate(`/provider/${provider.id}`);
+      router.push(`/provider/${provider.id}`);
     }
   };
 

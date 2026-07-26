@@ -1,37 +1,42 @@
+'use client';
+
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './BottomNav.module.scss';
 
 export const BottomNav: React.FC = () => {
+  const pathname = usePathname();
+
   return (
     <nav className={styles.bottomNav}>
-      <NavLink to="/" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+      <Link href="/" className={`${styles.navItem} ${pathname === '/' ? styles.active : ''}`}>
         <div className={styles.iconWrapper}>🏠</div>
         <span>Explore</span>
-      </NavLink>
+      </Link>
 
-      <NavLink to="/search" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+      <Link href="/search" className={`${styles.navItem} ${pathname === '/search' ? styles.active : ''}`}>
         <div className={styles.iconWrapper}>🔍</div>
         <span>Services</span>
-      </NavLink>
+      </Link>
 
-      <NavLink to="/cart" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+      <Link href="/cart" className={`${styles.navItem} ${pathname === '/cart' ? styles.active : ''}`}>
         <div className={styles.iconWrapper}>
           🛒
           <span className={styles.badge}>1</span>
         </div>
         <span>Cart</span>
-      </NavLink>
+      </Link>
 
-      <NavLink to="/orders" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+      <Link href="/orders" className={`${styles.navItem} ${pathname === '/orders' ? styles.active : ''}`}>
         <div className={styles.iconWrapper}>📦</div>
         <span>Orders</span>
-      </NavLink>
+      </Link>
 
-      <NavLink to="/profile" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+      <Link href="/profile" className={`${styles.navItem} ${pathname === '/profile' ? styles.active : ''}`}>
         <div className={styles.iconWrapper}>👤</div>
         <span>Account</span>
-      </NavLink>
+      </Link>
     </nav>
   );
 };

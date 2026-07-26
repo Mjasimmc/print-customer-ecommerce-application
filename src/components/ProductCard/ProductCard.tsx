@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { ProductService } from '../../mock/products';
 import styles from './ProductCard.module.scss';
 
@@ -8,10 +10,10 @@ export interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
-    <div className={styles.card} onClick={() => navigate(`/product/${product.id}`)}>
+    <div className={styles.card} onClick={() => router.push(`/product/${product.id}`)}>
       <div className={styles.imageWrapper}>
         <img
           src={product.image}

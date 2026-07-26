@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 import styles from './TopHeader.module.scss';
 
 export interface TopHeaderProps {
@@ -11,17 +14,18 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   locationText = '742 Evergreen Terrace, SF',
   hasUnreadNotifications = true,
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
         <div className={styles.leftSection}>
-          <div className={styles.brandLogo} onClick={() => navigate('/')}>
+          <div className={styles.brandLogo} onClick={() => router.push('/')}>
             LOCALHUB
           </div>
 
-          <div className={styles.locationPicker} onClick={() => navigate('/profile')}>
+          <div className={styles.locationPicker} onClick={() => router.push('/profile')}>
             <span className={styles.locationLabel}>Deliver to</span>
             <span className={styles.locationValue} title={locationText}>
               📍 {locationText} ▾
@@ -31,31 +35,31 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
 
         {/* Desktop Navigation Links */}
         <nav className={styles.desktopNav}>
-          <NavLink to="/" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+          <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>
             Explore
-          </NavLink>
-          <NavLink to="/search" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+          </Link>
+          <Link href="/search" className={`${styles.navLink} ${pathname === '/search' ? styles.active : ''}`}>
             Services
-          </NavLink>
-          <NavLink to="/providers" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+          </Link>
+          <Link href="/providers" className={`${styles.navLink} ${pathname === '/providers' ? styles.active : ''}`}>
             Local Providers
-          </NavLink>
-          <NavLink to="/pricing" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+          </Link>
+          <Link href="/pricing" className={`${styles.navLink} ${pathname === '/pricing' ? styles.active : ''}`}>
             Plans & Pro
-          </NavLink>
-          <NavLink to="/orders" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+          </Link>
+          <Link href="/orders" className={`${styles.navLink} ${pathname === '/orders' ? styles.active : ''}`}>
             My Orders
-          </NavLink>
-          <NavLink to="/profile" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+          </Link>
+          <Link href="/profile" className={`${styles.navLink} ${pathname === '/profile' ? styles.active : ''}`}>
             Account & Wallet
-          </NavLink>
+          </Link>
         </nav>
 
         <div className={styles.actions}>
-          <button className={styles.iconBtn} onClick={() => navigate('/cart')} title="Cart & Orders">
+          <button className={styles.iconBtn} onClick={() => router.push('/cart')} title="Cart & Orders">
             🛒
           </button>
-          <button className={styles.iconBtn} onClick={() => navigate('/notifications')} title="Notifications">
+          <button className={styles.iconBtn} onClick={() => router.push('/notifications')} title="Notifications">
             🔔
             {hasUnreadNotifications && <span className={styles.dot} />}
           </button>
