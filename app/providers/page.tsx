@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { TopHeader } from '../../src/components/Navigation/TopHeader';
-import { BottomNav } from '../../src/components/Navigation/BottomNav';
 import { ProviderCard } from '../../src/components/ProviderCard/ProviderCard';
 import { MOCK_PROVIDERS } from '../../src/mock/providers';
 import styles from '../../src/pages/Providers/ProvidersPage.module.scss';
@@ -19,35 +17,36 @@ export default function ProvidersPage() {
   );
 
   return (
-    <div>
-      <TopHeader />
-
-      <div className={styles.container}>
-        <div className={styles.headerRow}>
-          <div>
-            <h1 className={styles.title}>Verified Local Service Providers</h1>
-            <p className={styles.subtitle}>Discover top-rated local print shops, 3D labs, embroidery studios, and makers.</p>
-          </div>
-
-          <div className={styles.searchBar}>
-            <span>🔍</span>
-            <input
-              type="text"
-              placeholder="Search providers or specialties..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
+    <div className={styles.container}>
+      <div className={styles.headerRow}>
+        <div>
+          <h1 className={styles.title}>Verified Local Manufacturing Studios & Print Hubs</h1>
+          <p className={styles.subtitle}>
+            Discover top-rated local print shops, SLA/FDM 3D labs, embroidery workshops, and laser cutting centers.
+          </p>
         </div>
 
-        <div className={styles.grid}>
-          {filteredProviders.map((prov) => (
-            <ProviderCard key={prov.id} provider={prov} onClick={() => router.push(`/provider/${prov.id}`)} />
-          ))}
+        <div className={styles.searchBar}>
+          <span style={{ color: 'var(--color-primary)' }}>🔍</span>
+          <input
+            type="text"
+            placeholder="Search studios, machinery, or specialties..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          {query && (
+            <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-subtle)' }} onClick={() => setQuery('')}>
+              ✕
+            </button>
+          )}
         </div>
       </div>
 
-      <BottomNav />
+      <div className={styles.grid}>
+        {filteredProviders.map((prov) => (
+          <ProviderCard key={prov.id} provider={prov} onClick={() => router.push(`/provider/${prov.id}`)} />
+        ))}
+      </div>
     </div>
   );
 }

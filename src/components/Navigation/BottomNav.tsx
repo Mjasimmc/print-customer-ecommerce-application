@@ -8,35 +8,35 @@ import styles from './BottomNav.module.scss';
 export const BottomNav: React.FC = () => {
   const pathname = usePathname();
 
+  const navItems = [
+    { label: 'Explore', href: '/', icon: '⚡' },
+    { label: 'Services', href: '/search', icon: '🔍' },
+    { label: 'Cart', href: '/cart', icon: '🛒', badge: '2' },
+    { label: 'Orders', href: '/orders', icon: '📦' },
+    { label: 'Account', href: '/profile', icon: '👤' },
+  ];
+
   return (
     <nav className={styles.bottomNav}>
-      <Link href="/" className={`${styles.navItem} ${pathname === '/' ? styles.active : ''}`}>
-        <div className={styles.iconWrapper}>🏠</div>
-        <span>Explore</span>
-      </Link>
-
-      <Link href="/search" className={`${styles.navItem} ${pathname === '/search' ? styles.active : ''}`}>
-        <div className={styles.iconWrapper}>🔍</div>
-        <span>Services</span>
-      </Link>
-
-      <Link href="/cart" className={`${styles.navItem} ${pathname === '/cart' ? styles.active : ''}`}>
-        <div className={styles.iconWrapper}>
-          🛒
-          <span className={styles.badge}>1</span>
-        </div>
-        <span>Cart</span>
-      </Link>
-
-      <Link href="/orders" className={`${styles.navItem} ${pathname === '/orders' ? styles.active : ''}`}>
-        <div className={styles.iconWrapper}>📦</div>
-        <span>Orders</span>
-      </Link>
-
-      <Link href="/profile" className={`${styles.navItem} ${pathname === '/profile' ? styles.active : ''}`}>
-        <div className={styles.iconWrapper}>👤</div>
-        <span>Account</span>
-      </Link>
+      <div className={styles.dockInner}>
+        {navItems.map((item) => {
+          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${styles.navItem} ${isActive ? styles.active : ''}`}
+            >
+              <div className={styles.iconContainer}>
+                <span className={styles.icon}>{item.icon}</span>
+                {item.badge && <span className={styles.badge}>{item.badge}</span>}
+              </div>
+              <span className={styles.label}>{item.label}</span>
+              {isActive && <div className={styles.activeDot} />}
+            </Link>
+          );
+        })}
+      </div>
     </nav>
   );
 };

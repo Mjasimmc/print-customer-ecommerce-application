@@ -1,48 +1,102 @@
 .container {
-  padding-bottom: 80px;
+  padding-bottom: 96px;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: 1rem;
+  padding: 1.25rem 1rem;
+  max-width: 1024px;
+  margin: 0 auto;
+
+  @media (max-width: 360px) {
+    padding: 0.75rem 0.5rem;
+    gap: 1rem;
+  }
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--color-text-main);
+  letter-spacing: -0.015em;
+
+  @media (max-width: 360px) {
+    font-size: 1.15rem;
+  }
+}
+
+.totalOrdersCount {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 700;
 }
 
 .tabs {
   display: flex;
-  gap: 0.375rem;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 0.375rem;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  overflow-x: auto;
 }
 
 .tab {
-  padding: 0.375rem 0.875rem;
+  padding: 0.5rem 0.75rem;
   border: none;
-  background: none;
+  background: var(--bg-surface-l2);
   font-weight: 600;
   font-size: 0.8125rem;
-  color: #64748b;
+  color: var(--color-text-muted);
   cursor: pointer;
-  border-radius: 0.375rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+
+  @media (max-width: 360px) {
+    padding: 0.4rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  &:hover {
+    color: var(--color-text-main);
+  }
 
   &.active {
-    background: #eff6ff;
-    color: #2563eb;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 700;
   }
 }
 
-.orderCard {
-  background: #ffffff;
-  border-radius: 0.75rem;
-  border: 1px solid #e2e8f0;
-  padding: 0.875rem;
+.ordersList {
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 1rem;
+}
+
+.orderCard {
+  background: var(--bg-surface-l1);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  padding: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+
+  @media (max-width: 360px) {
+    padding: 0.875rem 0.625rem;
+  }
+
+  &:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .orderHeader {
@@ -51,18 +105,86 @@
   align-items: center;
 }
 
+.orderNumber {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+}
+
+.orderDate {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
 .badge {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
 
   &.in_production {
-    background: #dbeafe;
-    color: #1e40af;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border: 1px solid var(--border-glow);
   }
   &.delivered {
-    background: #ecfdf5;
-    color: #047857;
+    background: var(--color-success-bg);
+    color: var(--color-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
   }
+}
+
+.itemSummaryRow {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.itemIconBox {
+  font-size: 1.5rem;
+  background: var(--bg-surface-l2);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemDetails {
+  flex: 1;
+}
+
+.itemName {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+}
+
+.itemSubtext {
+  font-size: 0.775rem;
+  color: var(--color-text-muted);
+}
+
+.priceTag {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.etaText {
+  font-size: 0.775rem;
+  color: var(--color-text-subtle);
 }

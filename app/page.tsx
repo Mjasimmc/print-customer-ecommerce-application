@@ -2,8 +2,6 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { TopHeader } from '../src/components/Navigation/TopHeader';
-import { BottomNav } from '../src/components/Navigation/BottomNav';
 import { ProductCard } from '../src/components/ProductCard/ProductCard';
 import { ProviderCard } from '../src/components/ProviderCard/ProviderCard';
 import { MOCK_CATEGORIES } from '../src/mock/categories';
@@ -16,90 +14,126 @@ export default function HomePage() {
   const router = useRouter();
   const activeOrder = MOCK_ORDERS[0];
 
+  const quickShortcuts = [
+    '3D Printing (STL)',
+    'Embroidered Hoodies',
+    'Laser Engraving',
+    'Outdoor Banners',
+    'Business Cards',
+  ];
+
   return (
-    <div>
-      <TopHeader />
+    <div className={styles.container}>
+      {/* Operating System Hero Command Bar */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroSubtitle}>
+          <span>❖ Product Operating System</span>
+          <span>•</span>
+          <span>Hyperlocal Precision Manufacturing</span>
+        </div>
 
-      <div className={styles.container}>
-        {/* Search Hero */}
-        <section className={styles.heroSection}>
-          <h1 className={styles.heroTitle}>
-            On-Demand Local Services & Custom Manufacturing
-          </h1>
+        <h1 className={styles.heroTitle}>
+          On-Demand Printing, 3D Fabrication & Local Delivery Engine
+        </h1>
 
-          <div className={styles.searchBar} onClick={() => router.push('/search')}>
-            <span>🔍</span>
-            <input type="text" placeholder="Search services, products, 3D prints, apparel, gifts..." readOnly />
-            <span style={{ fontSize: '0.8rem', background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px', color: '#64748b' }}>Voice 🎙️</span>
-          </div>
-        </section>
+        <div className={styles.searchBar} onClick={() => router.push('/search')}>
+          <span className={styles.searchIcon}>🔍</span>
+          <input
+            type="text"
+            placeholder="Search 3D models, custom apparel, signage, corporate gifts or press ⌘K..."
+            readOnly
+          />
+          <span className={styles.kbdBadge}>
+            ⌘K Launcher
+          </span>
+        </div>
 
-        {/* Active Production Tracking Banner */}
-        {activeOrder && (
-          <div className={styles.activeOrderBanner} onClick={() => router.push(`/tracking/${activeOrder.id}`)}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ fontSize: '1.5rem' }}>🛠️</div>
-              <div>
-                <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', opacity: 0.9 }}>Active Service Progress</div>
-                <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{activeOrder.productName}</div>
-                <div style={{ fontSize: '0.75rem', opacity: 0.95 }}>{activeOrder.statusText} • Est: {activeOrder.estimatedDelivery}</div>
+        {/* Quick Filter Shortcut Pills */}
+        <div className={styles.shortcutTags}>
+          <span className={styles.tagLabel}>Frequent Specs:</span>
+          {quickShortcuts.map((sc) => (
+            <span
+              key={sc}
+              className={styles.tagPill}
+              onClick={() => router.push(`/search?q=${encodeURIComponent(sc)}`)}
+            >
+              {sc}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Active Production Tracking Telemetry Banner */}
+      {activeOrder && (
+        <div className={styles.activeOrderBanner} onClick={() => router.push(`/tracking/${activeOrder.id}`)}>
+          <div className={styles.activeOrderInfo}>
+            <div className={styles.activeOrderIcon}>
+              ⚙️
+            </div>
+            <div>
+              <div className={styles.activeOrderMeta}>
+                Live Production Telemetry #{activeOrder.orderNumber}
+              </div>
+              <div className={styles.activeOrderName}>{activeOrder.productName}</div>
+              <div className={styles.activeOrderEta}>
+                {activeOrder.statusText} • Est Arrival: {activeOrder.estimatedDelivery}
               </div>
             </div>
-            <span style={{ fontWeight: 800, fontSize: '0.85rem' }}>Track ➔</span>
           </div>
-        )}
+          <span className={styles.liveTelemetryTag}>
+            Live Telemetry ➔
+          </span>
+        </div>
+      )}
 
-        {/* Service Categories Scroll */}
-        <section>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Explore Service Categories</h2>
-            <span className={styles.seeAll} onClick={() => router.push('/search')}>All Categories ➔</span>
-          </div>
+      {/* Service Categories Matrix */}
+      <section>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Custom Manufacturing Capabilities</h2>
+          <span className={styles.seeAll} onClick={() => router.push('/search')}>View All Categories ➔</span>
+        </div>
 
-          <div className={styles.categoriesScroll} style={{ marginTop: '0.75rem' }}>
-            {MOCK_CATEGORIES.map((cat) => (
-              <div
-                key={cat.id}
-                className={styles.categoryCard}
-                onClick={() => router.push(`/search?category=${cat.id}`)}
-              >
-                <div className={styles.iconBg}>{cat.icon}</div>
-                <span className={styles.label}>{cat.name}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+        <div className={styles.categoriesScroll}>
+          {MOCK_CATEGORIES.map((cat) => (
+            <div
+              key={cat.id}
+              className={styles.categoryCard}
+              onClick={() => router.push(`/search?category=${cat.id}`)}
+            >
+              <div className={styles.iconBg}>{cat.icon}</div>
+              <span className={styles.label}>{cat.name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* Verified Local Service Providers Shelf */}
-        <section>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Nearby Service Providers</h2>
-            <span className={styles.seeAll} onClick={() => router.push('/providers')}>View All ➔</span>
-          </div>
+      {/* Nearby Verified Manufacturing Studios Shelf */}
+      <section>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Verified Nearby Local Studios</h2>
+          <span className={styles.seeAll} onClick={() => router.push('/providers')}>Explore All Hubs ➔</span>
+        </div>
 
-          <div className={styles.providersList} style={{ marginTop: '0.75rem' }}>
-            {MOCK_PROVIDERS.map((prov) => (
-              <ProviderCard key={prov.id} provider={prov} />
-            ))}
-          </div>
-        </section>
+        <div className={styles.providersList}>
+          {MOCK_PROVIDERS.map((prov) => (
+            <ProviderCard key={prov.id} provider={prov} />
+          ))}
+        </div>
+      </section>
 
-        {/* Popular Services & Products Grid */}
-        <section>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Popular Local Services</h2>
-            <span className={styles.seeAll} onClick={() => router.push('/search')}>Browse All ➔</span>
-          </div>
+      {/* Popular Services & Products Grid */}
+      <section>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Popular Local Services & Materials</h2>
+          <span className={styles.seeAll} onClick={() => router.push('/search')}>Full Catalog ➔</span>
+        </div>
 
-          <div className={styles.gridTwo} style={{ marginTop: '0.75rem' }}>
-            {MOCK_PRODUCTS.map((prod) => (
-              <ProductCard key={prod.id} product={prod} />
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <BottomNav />
+        <div className={styles.gridTwo}>
+          {MOCK_PRODUCTS.map((prod) => (
+            <ProductCard key={prod.id} product={prod} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

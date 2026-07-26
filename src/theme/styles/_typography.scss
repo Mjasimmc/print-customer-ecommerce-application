@@ -2,27 +2,73 @@
 $font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', 'Inter', system-ui, -ui-sans-serif, sans-serif;
 $font-family-mono: 'SF Mono', SFMono-Regular, 'JetBrains Mono', Consolas, monospace;
 
-// Font Sizes
-$font-size-xs: 0.75rem;     // 12px Caption / Helper
-$font-size-sm: 0.8125rem;   // 13px Label / Metadata
-$font-size-base: 0.875rem;  // 14px Body / Table
-$font-size-md: 1rem;        // 16px Body Large / Subtitle
-$font-size-lg: 1.125rem;    // 18px Title / H4
-$font-size-xl: 1.25rem;     // 20px Section Heading / H3
-$font-size-2xl: 1.5rem;     // 24px Page Heading / H2
-$font-size-3xl: 1.875rem;   // 30px Hero / H1
-$font-size-4xl: 2.25rem;    // 36px Display Large
+// Standardized Responsive Fluid Type Scale Variables
+$text-display: clamp(1.75rem, 4vw, 2.5rem);       // 28px -> 40px (Hero Headlines)
+$text-h1: clamp(1.35rem, 3vw, 1.875rem);          // 21.6px -> 30px (Page Titles)
+$text-h2: clamp(1.15rem, 2.5vw, 1.5rem);          // 18.4px -> 24px (Section Headings)
+$text-h3: clamp(1rem, 2vw, 1.25rem);              // 16px -> 20px (Card Titles)
+$text-h4: clamp(0.9375rem, 1.5vw, 1.125rem);      // 15px -> 18px (Subheadings)
+$text-body: clamp(0.875rem, 1.25vw, 1rem);        // 14px -> 16px (Standard Body)
+$text-subtext: 0.8125rem;                          // 13px (Labels / Secondary Meta)
+$text-caption: 0.75rem;                           // 12px (Badges / Captions)
+$text-micro: 0.6875rem;                           // 11px (Tags / Helper Text)
 
-// Line Heights
-$line-height-none: 1;
-$line-height-tight: 1.25;
-$line-height-snug: 1.375;
-$line-height-normal: 1.5;
-$line-height-relaxed: 1.625;
+// Standardized Line Heights
+$leading-none: 1;
+$leading-tight: 1.2;
+$leading-snug: 1.35;
+$leading-normal: 1.5;
+$leading-relaxed: 1.625;
 
-// Font Weights
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
-$font-weight-extrabold: 800;
+// Standardized Font Weights
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-extrabold: 800;
+
+// SCSS Mixins for Reusable Design System Typography
+@mixin text-display {
+  font-size: $text-display;
+  line-height: $leading-tight;
+  font-weight: $font-extrabold;
+  letter-spacing: -0.025em;
+}
+
+@mixin text-h1 {
+  font-size: $text-h1;
+  line-height: $leading-tight;
+  font-weight: $font-extrabold;
+  letter-spacing: -0.02em;
+}
+
+@mixin text-h2 {
+  font-size: $text-h2;
+  line-height: $leading-snug;
+  font-weight: $font-bold;
+  letter-spacing: -0.015em;
+}
+
+@mixin text-h3 {
+  font-size: $text-h3;
+  line-height: $leading-snug;
+  font-weight: $font-bold;
+}
+
+@mixin text-body {
+  font-size: $text-body;
+  line-height: $leading-normal;
+  font-weight: $font-regular;
+}
+
+@mixin text-subtext {
+  font-size: $text-subtext;
+  line-height: $leading-normal;
+  font-weight: $font-medium;
+}
+
+@mixin text-caption {
+  font-size: $text-caption;
+  line-height: $leading-normal;
+  font-weight: $font-semibold;
+}

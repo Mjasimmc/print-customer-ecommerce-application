@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import styles from './QualityInspector.module.scss';
 
 export interface QualityInspectorProps {
@@ -9,17 +11,28 @@ export interface QualityInspectorProps {
 }
 
 export const QualityInspector: React.FC<QualityInspectorProps> = ({
-  fileName = 'design_proof_v2.pdf',
+  fileName = 'manufacturing_blueprint_v3.stl',
   dpi = 300,
-  pageSize = '3.5 x 2.0 in',
-  colorSpace = 'CMYK (FOGRA39)',
+  pageSize = 'Standard Spec (3.5 x 2.0")',
+  colorSpace = 'CMYK (FOGRA39 / High-Def)',
 }) => {
-  const isHighQuality = dpi >= 300;
+  const [analyzing, setAnalyzing] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+
+  const isHighQuality = dpi >= 300 || isFixed;
+
+  const handleReanalyze = () => {
+    setAnalyzing(true);
+    setTimeout(() => {
+      setAnalyzing(false);
+      setIsFixed(true);
+    }, 800);
+  };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.inspector}>
       <div className={styles.header}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
           <span className={styles.fileIcon}>📄</span>
           <div>
             <div className={styles.fileName}>{fileName}</div>
@@ -28,30 +41,43 @@ export const QualityInspector: React.FC<QualityInspectorProps> = ({
         </div>
 
         <span className={`${styles.statusBadge} ${isHighQuality ? styles.good : styles.warning}`}>
-          {isHighQuality ? '✓ 300 DPI Verified' : '⚠️ Resolution Warning'}
+          {analyzing ? '⏳ Analyzing Mesh...' : isHighQuality ? '✓ Pre-flight Passed' : '⚠️ Resolution Alert'}
         </span>
       </div>
 
-      <div className={styles.meterTrack}>
+      <div className={styles.progressBar}>
         <div
-          className={`${styles.meterFill} ${isHighQuality ? styles.good : styles.warning}`}
-          style={{ width: `${Math.min(100, (dpi / 300) * 100)}%` }}
+          className={`${styles.progressFill} ${isHighQuality ? styles.good : styles.warning}`}
+          style={{ width: analyzing ? '60%' : isHighQuality ? '100%' : '72%' }}
         />
       </div>
 
-      <div className={styles.checkList}>
-        <div className={styles.checkItem}>
-          <span className={styles.checkIcon}>✓</span>
-          <span>Resolution ({dpi} DPI Ready)</span>
+      <div className={styles.metricsGrid}>
+        <div className={styles.metricBox}>
+          <div className={styles.value}>{isFixed ? '300 DPI (Up-scaled)' : `${dpi} DPI`}</div>
+          <div className={styles.label}>Resolution</div>
         </div>
-        <div className={styles.checkItem}>
-          <span className={styles.checkIcon}>✓</span>
-          <span>Color Space ({colorSpace})</span>
+        <div className={styles.metricBox}>
+          <div className={styles.value}>CMYK / STL</div>
+          <div className={styles.label}>Print Model</div>
         </div>
-        <div className={styles.checkItem}>
-          <span className={styles.checkIcon}>✓</span>
-          <span>Bleed & Safe Zone Alignment</span>
+        <div className={styles.metricBox}>
+          <div className={styles.value}>3.17 mm</div>
+          <div className={styles.label}>Safety Bleed</div>
         </div>
+      </div>
+
+      <div className={styles.footerActions}>
+        <span className={styles.checkText}>
+          {isHighQuality ? '✓ Vector paths & raster assets optimal for production' : '⚠️ 240 DPI raster detected in layer 2'}
+        </span>
+        <button
+          className={styles.fixBtn}
+          onClick={handleReanalyze}
+          disabled={analyzing || isFixed}
+        >
+          {analyzing ? 'Checking...' : isFixed ? '✓ Optimized' : '⚡ Auto-Optimize File'}
+        </button>
       </div>
     </div>
   );

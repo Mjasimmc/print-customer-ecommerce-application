@@ -3,115 +3,156 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../../src/ui';
-import { MOCK_USER_PROFILE } from '../../src/mock/userProfile';
 import styles from '../../src/pages/Checkout/CheckoutPage.module.scss';
 
 export default function CheckoutPage() {
   const router = useRouter();
+
   const [selectedAddress, setSelectedAddress] = useState('addr-1');
-  const [selectedFulfillment, setSelectedFulfillment] = useState('express');
-  const [selectedPayment, setSelectedPayment] = useState('wallet');
-  const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
+  const [selectedSpeed, setSelectedSpeed] = useState('express');
+  const [selectedPayment, setSelectedPayment] = useState('applepay');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const addresses = [
+    { id: 'addr-1', label: 'Primary Studio', detail: '742 Evergreen Terrace, San Francisco, CA 94107', tag: 'Default' },
+    { id: 'addr-2', label: 'Office Workshop', detail: '100 Mission St, Suite 400, San Francisco, CA 94105' },
+  ];
+
+  const handlePlaceOrder = () => {
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowModal(true);
+    }, 1200);
+  };
 
   return (
-    <div>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div>
         <div className={styles.stepHeader}>
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.25rem' }} onClick={() => router.push('/cart')}>
-            ← Back
-          </button>
-          <span style={{ fontWeight: 700, fontSize: '1rem' }}>Express Checkout</span>
-          <span style={{ fontSize: '0.8rem', color: '#059669', fontWeight: 700 }}>🔒 256-Bit SSL</span>
+          <span className={styles.stepTitle}>
+            Express Production Dispatch
+          </span>
+          <span className={styles.stepSubtitle}>Step 3 of 3</span>
         </div>
-
         <div className={styles.progressTrack}>
           <div className={`${styles.progressStep} ${styles.active}`} />
           <div className={`${styles.progressStep} ${styles.active}`} />
           <div className={`${styles.progressStep} ${styles.active}`} />
-          <div className={`${styles.progressStep} ${styles.active}`} />
-        </div>
-
-        {/* Step 1: Delivery Address */}
-        <section style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <h2 className={styles.sectionTitle}>1. Delivery Address</h2>
-          {MOCK_USER_PROFILE.addresses.map((addr) => (
-            <div
-              key={addr.id}
-              className={`${styles.card} ${styles.selectable} ${selectedAddress === addr.id ? styles.selected : ''}`}
-              onClick={() => setSelectedAddress(addr.id)}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>📍 {addr.label}</span>
-                {selectedAddress === addr.id && <span style={{ color: '#2563eb', fontWeight: 800 }}>✓ Selected</span>}
-              </div>
-              <p style={{ fontSize: '0.8rem', color: '#64748b' }}>{addr.address}</p>
-            </div>
-          ))}
-        </section>
-
-        {/* Step 2: Fulfillment Method */}
-        <section style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <h2 className={styles.sectionTitle}>2. Fulfillment Speed</h2>
-          {[
-            { id: 'express', label: '⚡ 2-Hour Express Courier', fee: '$5.99', est: 'Today by 5:30 PM' },
-            { id: 'standard', label: '🚚 Standard Ground Delivery', fee: '$2.99', est: 'Tomorrow by 2:00 PM' },
-            { id: 'pickup', label: '🏬 In-Store Pickup at Apex Craft Studio', fee: 'FREE', est: 'Ready in 45 mins' },
-          ].map((m) => (
-            <div
-              key={m.id}
-              className={`${styles.card} ${styles.selectable} ${selectedFulfillment === m.id ? styles.selected : ''}`}
-              onClick={() => setSelectedFulfillment(m.id)}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>{m.label}</span>
-                <span style={{ fontWeight: 800, fontSize: '0.9rem', color: '#2563eb' }}>{m.fee}</span>
-              </div>
-              <span style={{ fontSize: '0.75rem', color: '#64748b' }}>Est: {m.est}</span>
-            </div>
-          ))}
-        </section>
-
-        {/* Step 3: Payment Method */}
-        <section style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <h2 className={styles.sectionTitle}>3. Payment Method</h2>
-          {[
-            { id: 'wallet', label: `💳 Service Wallet Balance ($${MOCK_USER_PROFILE.walletBalance.toFixed(2)})`, note: 'Instant One-Tap Pay' },
-            { id: 'apple-pay', label: '🍏 Apple Pay / Google Pay', note: 'Fast & Secure' },
-            { id: 'card-1', label: '💳 Visa ending in 4242', note: 'Saved Card' },
-          ].map((p) => (
-            <div
-              key={p.id}
-              className={`${styles.card} ${styles.selectable} ${selectedPayment === p.id ? styles.selected : ''}`}
-              onClick={() => setSelectedPayment(p.id)}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>{p.label}</span>
-                {selectedPayment === p.id && <span style={{ color: '#2563eb', fontWeight: 800 }}>✓ Selected</span>}
-              </div>
-              <span style={{ fontSize: '0.75rem', color: '#64748b' }}>{p.note}</span>
-            </div>
-          ))}
-        </section>
-
-        {/* Final Payment Button */}
-        <div style={{ marginTop: '1rem' }}>
-          <Button variant="primary" size="lg" style={{ width: '100%' }} onClick={() => setIsOrderConfirmed(true)}>
-            Pay $43.79 & Place Order
-          </Button>
         </div>
       </div>
 
-      {/* Order Confirmation Modal */}
-      {isOrderConfirmed && (
+      {/* Delivery Location Selector */}
+      <div className={styles.sectionBlock}>
+        <h2 className={styles.sectionTitle}>1. Destination Address</h2>
+        {addresses.map((addr) => (
+          <div
+            key={addr.id}
+            className={`${styles.card} ${styles.selectable} ${selectedAddress === addr.id ? styles.selected : ''}`}
+            onClick={() => setSelectedAddress(addr.id)}
+          >
+            <div className={styles.cardHeaderRow}>
+              <span className={styles.cardLabel}>
+                📍 {addr.label}
+              </span>
+              {addr.tag && (
+                <span className={styles.defaultBadge}>
+                  {addr.tag}
+                </span>
+              )}
+            </div>
+            <p className={styles.cardDetailText}>{addr.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Fulfilling Speed Option */}
+      <div className={styles.sectionBlock}>
+        <h2 className={styles.sectionTitle}>2. Production & Delivery Velocity</h2>
+        <div
+          className={`${styles.card} ${styles.selectable} ${selectedSpeed === 'express' ? styles.selected : ''}`}
+          onClick={() => setSelectedSpeed('express')}
+        >
+          <div className={styles.cardHeaderRow}>
+            <span className={styles.cardLabel}>
+              ⚡ 2-Hour Express Local Courier
+            </span>
+            <span className={styles.priceAddon}>+$9.99</span>
+          </div>
+          <p className={styles.cardDetailText}>
+            Assigned to Express Print Lab SF with instant courier pickup upon completion.
+          </p>
+        </div>
+
+        <div
+          className={`${styles.card} ${styles.selectable} ${selectedSpeed === 'standard' ? styles.selected : ''}`}
+          onClick={() => setSelectedSpeed('standard')}
+        >
+          <div className={styles.cardHeaderRow}>
+            <span className={styles.cardLabel}>
+              🚚 Standard Same-Day (By 8 PM)
+            </span>
+            <span className={styles.freeTag}>FREE</span>
+          </div>
+          <p className={styles.cardDetailText}>
+            Batch dispatch with standard neighborhood courier delivery.
+          </p>
+        </div>
+      </div>
+
+      {/* Payment Method Selector */}
+      <div className={styles.sectionBlock}>
+        <h2 className={styles.sectionTitle}>3. Secure Instant Payment Gateway</h2>
+        <div className={styles.paymentGrid}>
+          {[
+            { id: 'applepay', label: 'Pay', icon: '' },
+            { id: 'card', label: 'Visa • 4242', icon: '💳' },
+            { id: 'invoice', label: 'Pro Net-30', icon: '📄' },
+          ].map((pm) => (
+            <div
+              key={pm.id}
+              className={`${styles.paymentCard} ${selectedPayment === pm.id ? styles.selected : ''}`}
+              onClick={() => setSelectedPayment(pm.id)}
+            >
+              <div className={styles.paymentIcon}>{pm.icon}</div>
+              <div className={styles.paymentLabel}>
+                {pm.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Final Submit Button */}
+      <Button
+        variant="primary"
+        size="lg"
+        className={styles.submitBtn}
+        onClick={handlePlaceOrder}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Transmitting Production Blueprint...' : 'Confirm & Dispatch Production ($89.12) ➔'}
+      </Button>
+
+      {/* Success Telemetry Modal */}
+      {showModal && (
         <div className={styles.confirmationModal}>
           <div className={styles.modalContent}>
             <div className={styles.successIcon}>✓</div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>Order Placed!</h2>
-            <p style={{ fontSize: '0.85rem', color: '#64748b' }}>
-              Your order <strong>#PD-893012</strong> has been accepted by Apex Craft & Print Studio. Production has started!
+            <h2 className={styles.modalTitle}>
+              Production Blueprint Transmitted!
+            </h2>
+            <p className={styles.modalDesc}>
+              Your order <strong>#ORD-9482</strong> has been accepted by <strong>Express Print Lab SF</strong>. Pre-flight verification passed.
             </p>
-            <Button variant="primary" size="lg" style={{ width: '100%' }} onClick={() => router.push('/tracking/ord-1094')}>
-              Track Live Progress ➔
+            <Button
+              variant="primary"
+              size="md"
+              className={styles.telemetryBtn}
+              onClick={() => router.push('/tracking/ord-1')}
+            >
+              Open Live GPS Telemetry ➔
             </Button>
           </div>
         </div>

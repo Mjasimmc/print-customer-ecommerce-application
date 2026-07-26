@@ -1,21 +1,37 @@
-$color-slate-50: #f8fafc;
-$color-slate-100: #f1f5f9;
-$color-slate-200: #e2e8f0;
-$color-slate-300: #cbd5e1;
-$color-slate-400: #94a3b8;
-$color-slate-500: #64748b;
-$color-slate-600: #475569;
-$color-slate-700: #334155;
-$color-slate-800: #1e293b;
-$color-slate-900: #0f172a;
+// Premium Layered Surface & Color Architecture
 
-$color-primary-50: #eff6ff;
-$color-primary-100: #dbeafe;
-$color-primary-200: #bfdbfe;
-$color-primary-500: #3b82f6;
-$color-primary-600: #2563eb;
-$color-primary-700: #1d4ed8;
+// Warm Neutral Canvas (Level 0)
+$canvas-light: #f7f9fc;
+$canvas-dark: #0b0f19;
 
-$color-success-main: #059669;
-$color-warning-main: #d97706;
-$color-danger-main: #dc2626;
+// Surface Hierarchies
+$surface-l1-light: #ffffff;
+$surface-l1-dark: #131b2e;
+
+$surface-l2-light: #f1f5f9;
+$surface-l2-dark: #1a233a;
+
+$surface-l3-light: #ffffff;
+$surface-l3-dark: #222d48;
+
+// Borders & Transparencies
+$border-light: rgba(226, 232, 240, 0.85);
+$border-dark: rgba(255, 255, 255, 0.08);
+
+// Primary & Accent Tones
+$primary-main: #2563eb;
+$primary-hover: #1d4ed8;
+$primary-dark-main: #3b82f6;
+
+$success-main: #059669;
+$warning-main: #d97706;
+$danger-main: #dc2626;
+
+// Text Hierarchy
+$text-primary-light: #0f172a;
+$text-secondary-light: #475569;
+$text-tertiary-light: #94a3b8;
+
+$text-primary-dark: #f8fafc;
+$text-secondary-dark: #cbd5e1;
+$text-tertiary-dark: #64748b;

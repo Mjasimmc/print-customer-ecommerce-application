@@ -4,7 +4,6 @@ import React, { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../../../src/ui';
 import { OrderTimeline } from '../../../src/components/OrderTimeline/OrderTimeline';
-import { BottomNav } from '../../../src/components/Navigation/BottomNav';
 import { MOCK_ORDERS } from '../../../src/mock/orders';
 import styles from '../../../src/pages/OrderTracking/OrderTrackingPage.module.scss';
 
@@ -15,68 +14,87 @@ export default function OrderTrackingPage({ params }: { params: Promise<{ id: st
   const order = MOCK_ORDERS.find((o) => o.id === resolvedParams.id) || MOCK_ORDERS[0];
 
   return (
-    <div>
-      <div className={styles.container}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.25rem' }} onClick={() => router.push('/orders')}>
-            ← Back
-          </button>
-          <span style={{ fontWeight: 800, fontSize: '1rem' }}>Order #{order.orderNumber}</span>
-          <span style={{ fontSize: '0.8rem', color: '#2563eb', fontWeight: 700 }}>Receipt 📄</span>
+    <div className={styles.container}>
+      <div className={styles.topBar}>
+        <button
+          className={styles.backBtn}
+          onClick={() => router.push('/orders')}
+        >
+          ← Back to Orders
+        </button>
+        <span className={styles.orderTitle}>
+          Telemetry Order #{order.orderNumber}
+        </span>
+        <button
+          className={styles.receiptBtn}
+          onClick={() => alert(`Receipt downloaded for Order #${order.orderNumber}`)}
+        >
+          Receipt 📄
+        </button>
+      </div>
+
+      {/* Live Driver Map Placeholder Card */}
+      <div className={styles.mapCard}>
+        <div className={styles.mapHeader}>
+          <div className={styles.mapIcon}>🗺️</div>
+          <div className={styles.mapTitle}>Live Express GPS Dispatch Telemetry</div>
+          <div className={styles.mapSubtitle}>Real-time satellite positioning active</div>
         </div>
 
-        {/* Map Placeholder Card */}
-        <div className={styles.mapCard}>
-          <div style={{ textAlign: 'center', color: '#1e3a8a' }}>
-            <div style={{ fontSize: '2.25rem' }}>🗺️</div>
-            <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>Live GPS Express Driver Tracking</div>
-          </div>
-
-          <div className={styles.mapOverlay}>
-            <div>
-              <div style={{ fontSize: '0.6875rem', color: '#64748b', textTransform: 'uppercase' }}>Estimated Arrival</div>
-              <div style={{ fontWeight: 800, fontSize: '0.9375rem', color: '#0f172a' }}>5:30 PM (24 mins left)</div>
-            </div>
-            <span style={{ background: '#ecfdf5', color: '#047857', fontSize: '0.7rem', fontWeight: 700, padding: '3px 8px', borderRadius: '9999px' }}>
-              On Schedule
-            </span>
-          </div>
-        </div>
-
-        {/* Courier Box */}
-        <div className={styles.courierBox}>
+        <div className={styles.mapOverlay}>
           <div>
-            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Courier Driver</div>
-            <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>🚴 {order.courierName}</div>
-            <div style={{ fontSize: '0.75rem', color: '#059669' }}>Verified Express Courier</div>
+            <div className={styles.etaLabel}>
+              Estimated Delivery Window
+            </div>
+            <div className={styles.etaValue}>
+              5:30 PM (24 mins remaining)
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <button className={styles.contactBtn} title="Call Driver">📞</button>
-            <button className={styles.contactBtn} title="Message Driver">💬</button>
-          </div>
-        </div>
-
-        {/* Production Timeline */}
-        <div>
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Service Production & Delivery Timeline</h3>
-          <OrderTimeline steps={order.timeline} />
-        </div>
-
-        {/* Item Summary */}
-        <div style={{ background: '#ffffff', borderRadius: '0.75rem', border: '1px solid #e2e8f0', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <h4 style={{ fontWeight: 700, fontSize: '0.9rem' }}>Service Specification Summary</h4>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-            <span>{order.productName} ({order.itemCount} units)</span>
-            <span style={{ fontWeight: 700 }}>${order.totalPrice.toFixed(2)}</span>
-          </div>
-          <span style={{ fontSize: '0.75rem', color: '#64748b' }}>Provider: {order.providerName}</span>
-          <Button variant="outline" size="sm" style={{ marginTop: '0.5rem' }} onClick={() => router.push('/orders')}>
-            Repeat Order
-          </Button>
+          <span className={styles.statusBadge}>
+            ● On Schedule
+          </span>
         </div>
       </div>
 
-      <BottomNav />
+      {/* Verified Courier Details */}
+      <div className={styles.courierBox}>
+        <div>
+          <div className={styles.driverLabel}>Assigned Driver</div>
+          <div className={styles.driverName}>
+            🚴 {order.courierName}
+          </div>
+          <div className={styles.driverVerified}>
+            ✓ Verified Express Dispatcher
+          </div>
+        </div>
+        <div className={styles.courierActions}>
+          <button className={styles.contactBtn} title="Call Driver" onClick={() => alert(`Calling ${order.courierName}...`)}>📞</button>
+          <button className={styles.contactBtn} title="Message Driver" onClick={() => alert(`Opening chat with ${order.courierName}...`)}>💬</button>
+        </div>
+      </div>
+
+      {/* Live Production Pipeline Step Timeline */}
+      <div>
+        <h3 className={styles.pipelineHeader}>
+          Service Production & Delivery Pipeline
+        </h3>
+        <OrderTimeline steps={order.timeline} />
+      </div>
+
+      {/* Specification Summary Card */}
+      <div className={styles.specCard}>
+        <h4 className={styles.specHeader}>Service Specification Summary</h4>
+        <div className={styles.specRow}>
+          <span style={{ fontWeight: 600 }}>{order.productName} ({order.itemCount} units)</span>
+          <span className={styles.specPrice}>${order.totalPrice.toFixed(2)}</span>
+        </div>
+        <span className={styles.studioNameText}>
+          Fulfilling Studio: {order.providerName}
+        </span>
+        <Button variant="outline" size="sm" style={{ width: 'fit-content', marginTop: '0.25rem' }} onClick={() => router.push('/orders')}>
+          Repeat Order Spec 🔄
+        </Button>
+      </div>
     </div>
   );
 }

@@ -15,6 +15,7 @@ node_modules/
 .pnpm-store/
 
 # Production build outputs
+.next
 dist/
 dist-ssr/
 build/

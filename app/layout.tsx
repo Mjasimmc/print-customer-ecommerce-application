@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.scss';
 import { AppProvider } from '../src/providers/AppProvider';
+import { AppShell } from '../src/components/AppShell/AppShell';
 
 export const metadata: Metadata = {
   title: 'LocalHub | On-Demand Local Services & Custom Manufacturing Marketplace',
@@ -39,9 +40,12 @@ export default function RootLayout({
       </head>
       <body>
         <AppProvider>
-          {children}
+          <AppShell>
+            {children}
+          </AppShell>
         </AppProvider>
       </body>
     </html>
   );
 }
+
