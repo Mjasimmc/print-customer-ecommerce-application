@@ -1,0 +1,12 @@
+# Vercel Deployment Exclusions
+node_modules
+.pnpm-store
+.git
+.gitignore
+.vscode
+.idea
+*.log
+coverage
+.nyc_output
+tmp
+temp
