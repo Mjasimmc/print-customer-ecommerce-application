@@ -1,8 +1,8 @@
-@use '@print-delivery/theme/scss/colors';
-@use '@print-delivery/theme/scss/typography';
-@use '@print-delivery/theme/scss/spacing';
-@use '@print-delivery/theme/scss/breakpoints' as *;
-@import '@print-delivery/theme/scss/theme.css';
+@use '../theme/styles/colors';
+@use '../theme/styles/typography';
+@use '../theme/styles/spacing';
+@use '../theme/styles/breakpoints' as *;
+@import '../theme/styles/theme.css';
 
 * {
   box-sizing: border-box;
@@ -18,9 +18,10 @@ html, body {
   overflow-x: hidden;
   background-color: var(--color-bg-app, #f8fafc);
   color: var(--color-text-main, #0f172a);
-  font-family: var(--font-family-base, 'Inter', sans-serif);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', 'Inter', system-ui, -ui-sans-serif, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 #root {

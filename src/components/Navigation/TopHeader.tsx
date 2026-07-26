@@ -23,7 +23,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
 
           <div className={styles.locationPicker} onClick={() => navigate('/profile')}>
             <span className={styles.locationLabel}>Deliver to</span>
-            <span className={styles.locationValue}>
+            <span className={styles.locationValue} title={locationText}>
               📍 {locationText} ▾
             </span>
           </div>

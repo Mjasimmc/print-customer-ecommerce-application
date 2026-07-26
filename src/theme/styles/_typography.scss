@@ -1,9 +1,28 @@
-$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-size-xs: 0.75rem;
-$font-size-sm: 0.8125rem;
-$font-size-base: 0.875rem;
-$font-size-md: 1rem;
-$font-size-lg: 1.125rem;
-$font-size-xl: 1.25rem;
-$font-size-2xl: 1.5rem;
-$font-size-3xl: 1.875rem;
+// Native iOS SF Pro & Plus Jakarta Sans Type Scale Architecture
+$font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', 'Inter', system-ui, -ui-sans-serif, sans-serif;
+$font-family-mono: 'SF Mono', SFMono-Regular, 'JetBrains Mono', Consolas, monospace;
+
+// Font Sizes
+$font-size-xs: 0.75rem;     // 12px Caption / Helper
+$font-size-sm: 0.8125rem;   // 13px Label / Metadata
+$font-size-base: 0.875rem;  // 14px Body / Table
+$font-size-md: 1rem;        // 16px Body Large / Subtitle
+$font-size-lg: 1.125rem;    // 18px Title / H4
+$font-size-xl: 1.25rem;     // 20px Section Heading / H3
+$font-size-2xl: 1.5rem;     // 24px Page Heading / H2
+$font-size-3xl: 1.875rem;   // 30px Hero / H1
+$font-size-4xl: 2.25rem;    // 36px Display Large
+
+// Line Heights
+$line-height-none: 1;
+$line-height-tight: 1.25;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+
+// Font Weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
