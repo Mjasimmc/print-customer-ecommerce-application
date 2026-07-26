@@ -1,0 +1,65 @@
+.providerCard {
+  background: #ffffff;
+  border-radius: 0.875rem;
+  border: 1px solid #e5e7eb;
+  padding: 0.875rem;
+  display: flex;
+  gap: 0.875rem;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.verified {
+  color: #10b981;
+  font-size: 0.85rem;
+}
+
+.meta {
+  font-size: 0.75rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag {
+  background-color: #eef2ff;
+  color: #4f46e5;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-top: 2px;
+}

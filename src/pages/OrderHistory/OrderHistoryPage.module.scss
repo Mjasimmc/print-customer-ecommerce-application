@@ -1,0 +1,68 @@
+.container {
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1rem;
+}
+
+.header {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.375rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.375rem;
+}
+
+.tab {
+  padding: 0.375rem 0.875rem;
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 0.375rem;
+
+  &.active {
+    background: #eff6ff;
+    color: #2563eb;
+  }
+}
+
+.orderCard {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+
+  &.in_production {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+  &.delivered {
+    background: #ecfdf5;
+    color: #047857;
+  }
+}

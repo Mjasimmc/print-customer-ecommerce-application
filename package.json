@@ -1,0 +1,46 @@
+{
+  "name": "@print-delivery/customer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@print-delivery/api": "workspace:*",
+    "@print-delivery/assets": "workspace:*",
+    "@print-delivery/auth": "workspace:*",
+    "@print-delivery/config": "workspace:*",
+    "@print-delivery/constants": "workspace:*",
+    "@print-delivery/hooks": "workspace:*",
+    "@print-delivery/layouts": "workspace:*",
+    "@print-delivery/localization": "workspace:*",
+    "@print-delivery/permissions": "workspace:*",
+    "@print-delivery/router": "workspace:*",
+    "@print-delivery/theme": "workspace:*",
+    "@print-delivery/types": "workspace:*",
+    "@print-delivery/ui": "workspace:*",
+    "@print-delivery/utils": "workspace:*",
+    "@tanstack/react-query": "^5.64.2",
+    "axios": "^1.7.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "react-router-dom": "^7.1.3",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@print-delivery/tsconfig": "workspace:*",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sass": "^1.83.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  }
+}

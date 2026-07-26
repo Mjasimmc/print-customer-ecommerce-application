@@ -1,0 +1,44 @@
+@use '@print-delivery/theme/scss/colors';
+@use '@print-delivery/theme/scss/typography';
+@use '@print-delivery/theme/scss/spacing';
+@use '@print-delivery/theme/scss/breakpoints' as *;
+@import '@print-delivery/theme/scss/theme.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  background-color: var(--color-bg-app, #f8fafc);
+  color: var(--color-text-main, #0f172a);
+  font-family: var(--font-family-base, 'Inter', sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+
+  @media (min-width: 768px) {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}

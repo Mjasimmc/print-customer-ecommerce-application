@@ -1,0 +1,10 @@
+{
+  "extends": "@print-delivery/tsconfig/vite-app.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

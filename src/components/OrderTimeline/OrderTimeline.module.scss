@@ -1,0 +1,73 @@
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 11px;
+    bottom: -16px;
+    width: 2px;
+    background-color: #e5e7eb;
+    z-index: 1;
+  }
+
+  &.completed:not(:last-child)::after {
+    background-color: #10b981;
+  }
+}
+
+.iconDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.completed .iconDot {
+  background-color: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+}
+
+.active .iconDot {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
